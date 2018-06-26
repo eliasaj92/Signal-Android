@@ -160,10 +160,6 @@
         <attr name="maxHeight" format="dimension" />
     </declare-styleable>
 
-    <declare-styleable name="DeliveryStatusView">
-        <attr name="iconColor" format="color" />
-    </declare-styleable>
-
     <declare-styleable name="AlertView">
         <attr name="useSmallIcon" format="boolean" />
     </declare-styleable>

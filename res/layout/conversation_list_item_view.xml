@@ -147,8 +147,7 @@
             <org.thoughtcrime.securesms.components.DeliveryStatusView
                     android:id="@+id/delivery_status"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:iconColor="?attr/conversation_list_item_subject_color"/>
+                    android:layout_height="wrap_content" />
 
             <ImageView android:id="@+id/unread_indicator"
                        android:layout_width="24dp"

@@ -45,11 +45,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/Signal.Text.Caption"
+                    android:textColor="@color/core_black"
                     android:textStyle="bold"
                     android:maxLines="1"
                     android:ellipsize="end"
-                    tools:text="Peter Parker"
-                    tools:textColor="@color/purple_400" />
+                    tools:text="Peter Parker" />
 
                 <TextView
                     android:id="@+id/media_name"

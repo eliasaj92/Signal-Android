@@ -14,25 +14,12 @@ public class MaterialColors {
     MaterialColor.RED,
     MaterialColor.PINK,
     MaterialColor.PURPLE,
-
-    MaterialColor.DEEP_PURPLE,
     MaterialColor.INDIGO,
     MaterialColor.BLUE,
-
-    MaterialColor.LIGHT_BLUE,
     MaterialColor.CYAN,
     MaterialColor.TEAL,
     MaterialColor.GREEN,
-    MaterialColor.LIGHT_GREEN,
-    // Lime
-    // Yellow
-    // Amber
-    MaterialColor.ORANGE,
-    MaterialColor.DEEP_ORANGE,
-//    MaterialColor.BROWN,
-    MaterialColor.AMBER,
-    // Grey
-    MaterialColor.BLUE_GREY
+    MaterialColor.ORANGE
   )));
 
   public static class MaterialColorList {

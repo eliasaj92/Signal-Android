@@ -184,7 +184,6 @@ public class QuoteView extends LinearLayout implements RecipientModifiedListener
 
     authorView.setText(isOwnNumber ? getContext().getString(R.string.QuoteView_you)
                                    : author.toShortString());
-    authorView.setTextColor(author.getColor().toQuoteTitleColor(getContext()));
     // We use the raw color resource because Android 4.x was struggling with tints here
     quoteBarView.setImageResource(author.getColor().toQuoteBarColorResource(getContext(), outgoing));
 
@@ -232,8 +231,8 @@ public class QuoteView extends LinearLayout implements RecipientModifiedListener
                                   @NonNull Recipient author)
   {
     List<Slide> imageVideoSlides = Stream.of(slideDeck.getSlides()).filter(s -> s.hasImage() || s.hasVideo()).limit(1).toList();
-    List<Slide> audioSlides = Stream.of(attachments.getSlides()).filter(Slide::hasAudio).limit(1).toList();
-    List<Slide> documentSlides = Stream.of(attachments.getSlides()).filter(Slide::hasDocument).limit(1).toList();
+    List<Slide> audioSlides      = Stream.of(attachments.getSlides()).filter(Slide::hasAudio).limit(1).toList();
+    List<Slide> documentSlides   = Stream.of(attachments.getSlides()).filter(Slide::hasDocument).limit(1).toList();
 
     attachmentVideoOverlayView.setVisibility(GONE);
 

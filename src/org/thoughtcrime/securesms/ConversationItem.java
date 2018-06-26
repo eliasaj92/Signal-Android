@@ -282,7 +282,7 @@ public class ConversationItem extends LinearLayout
     }
 
     int availableWidth = getAvailableMessageBubbleWidth(footer);
-    if (footer.getMeasuredWidth() != availableWidth) {
+    if (footer.getMeasuredWidth() < availableWidth) {
       footer.getLayoutParams().width = availableWidth;
       needsMeasure = true;
     }
@@ -295,7 +295,7 @@ public class ConversationItem extends LinearLayout
   private int getAvailableMessageBubbleWidth(@NonNull View forView) {
     int availableWidth;
     if (hasAudio(messageRecord)) {
-      availableWidth = audioViewStub.get().getMeasuredWidth();
+      availableWidth = audioViewStub.get().getMeasuredWidth() + getLeftMargin(audioViewStub.get()) + getRightMargin(audioViewStub.get());
     } else if (hasThumbnail(messageRecord)) {
       availableWidth = mediaThumbnailStub.get().getMeasuredWidth();
     } else {
