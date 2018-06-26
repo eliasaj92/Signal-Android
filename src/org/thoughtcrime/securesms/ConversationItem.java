@@ -28,6 +28,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
@@ -260,6 +261,10 @@ public class ConversationItem extends LinearLayout
   protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
     super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
+    if (isInEditMode()) {
+      return;
+    }
+
     if (hasQuote(messageRecord)) {
       int quoteWidth = quoteView.getMeasuredWidth();
 
@@ -427,6 +432,7 @@ public class ConversationItem extends LinearLayout
       sharedContactStub.get().setOnLongClickListener(passthroughClickListener);
 
       bodyText.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+      ((ConstraintLayout.LayoutParams) bodyText.getLayoutParams()).matchConstraintDefaultWidth = ConstraintLayout.LayoutParams.MATCH_CONSTRAINT_WRAP;
     } else if (hasAudio(messageRecord)) {
       audioViewStub.get().setVisibility(View.VISIBLE);
       if (mediaThumbnailStub.resolved()) mediaThumbnailStub.get().setVisibility(View.GONE);
@@ -473,13 +479,24 @@ public class ConversationItem extends LinearLayout
       mediaThumbnailStub.get().setOnClickListener(passthroughClickListener);
 
       bodyText.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+
+      if (!hasQuote(messageRecord)) {
+        setPaddingTop(bodyBubble, 0);
+      } else {
+        setPaddingTop(bodyBubble, getResources().getDimensionPixelOffset(R.dimen.message_bubble_top_padding));
+      }
     } else {
       if (mediaThumbnailStub.resolved()) mediaThumbnailStub.get().setVisibility(View.GONE);
       if (audioViewStub.resolved())      audioViewStub.get().setVisibility(View.GONE);
       if (documentViewStub.resolved())   documentViewStub.get().setVisibility(View.GONE);
       if (sharedContactStub.resolved())  sharedContactStub.get().setVisibility(GONE);
       bodyText.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+      setPaddingTop(bodyBubble, getResources().getDimensionPixelOffset(R.dimen.message_bubble_top_padding));
     }
+  }
+
+  private void setPaddingTop(@NonNull View view, int padding) {
+    view.setPadding(getPaddingLeft(), padding, getPaddingRight(), getPaddingBottom());
   }
 
   private void setContactPhoto(@NonNull Recipient recipient) {

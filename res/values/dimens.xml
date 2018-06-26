@@ -16,8 +16,10 @@
     <dimen name="contact_photo_target_size">64dp</dimen>
     <dimen name="contact_selection_photo_size">50dp</dimen>
 
-    <dimen name="message_bubble_corner_radius">4dp</dimen>
+    <dimen name="message_bubble_corner_radius">2dp</dimen>
     <dimen name="message_bubble_shadow_distance">1.5dp</dimen>
+    <dimen name="message_bubble_horizontal_padding">12dp</dimen>
+    <dimen name="message_bubble_top_padding">6dp</dimen>
     <dimen name="media_bubble_remove_button_size">24dp</dimen>
     <dimen name="media_bubble_edit_button_size">24dp</dimen>
     <dimen name="media_bubble_default_dimens">210dp</dimen>
@@ -25,6 +27,7 @@
     <dimen name="media_bubble_max_width">250dp</dimen>
     <dimen name="media_bubble_min_height">100dp</dimen>
     <dimen name="media_bubble_max_height">320dp</dimen>
+
 
     <dimen name="quote_corner_radius">3dp</dimen>
     <dimen name="quote_outline_width">1dp</dimen>
