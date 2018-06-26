@@ -66,7 +66,9 @@ public class QuoteView extends LinearLayout implements RecipientModifiedListener
   private TextView  mediaDescriptionText;
   private SlideDeck attachments;
   private int       messageType;
-  private int       roundedCornerRadiusPx;
+  private int       roundedCornerRadiusTopPx;
+  private int       roundedCornerRadiusBottomPx;
+  private float[]   cornerRadii;
 
   private final Path  clipPath = new Path();
   private final RectF drawRect = new RectF();
@@ -106,7 +108,12 @@ public class QuoteView extends LinearLayout implements RecipientModifiedListener
     this.attachmentIconBackgroundView = findViewById(R.id.quote_attachment_icon_background);
     this.dismissView                  = findViewById(R.id.quote_dismiss);
     this.mediaDescriptionText         = findViewById(R.id.media_name);
-    this.roundedCornerRadiusPx        = getResources().getDimensionPixelSize(R.dimen.quote_corner_radius);
+    this.roundedCornerRadiusTopPx     = getResources().getDimensionPixelSize(R.dimen.quote_corner_radius_top);
+    this.roundedCornerRadiusBottomPx  = getResources().getDimensionPixelSize(R.dimen.quote_corner_radius_bottom);
+    this.cornerRadii                  = new float[] { roundedCornerRadiusTopPx, roundedCornerRadiusTopPx,
+                                                      roundedCornerRadiusTopPx, roundedCornerRadiusTopPx,
+                                                      roundedCornerRadiusBottomPx, roundedCornerRadiusBottomPx,
+                                                      roundedCornerRadiusBottomPx, roundedCornerRadiusBottomPx };
 
     if (attrs != null) {
       TypedArray typedArray  = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.QuoteView, 0, 0);
@@ -134,7 +141,7 @@ public class QuoteView extends LinearLayout implements RecipientModifiedListener
     drawRect.bottom = getHeight();
 
     clipPath.reset();
-    clipPath.addRoundRect(drawRect, roundedCornerRadiusPx, roundedCornerRadiusPx, Path.Direction.CW);
+    clipPath.addRoundRect(drawRect, cornerRadii, Path.Direction.CW);
     canvas.clipPath(clipPath);
   }
 
@@ -183,8 +190,6 @@ public class QuoteView extends LinearLayout implements RecipientModifiedListener
 
     GradientDrawable background = (GradientDrawable) rootView.getBackground();
     background.setColor(author.getColor().toQuoteBackgroundColor(getContext(), outgoing));
-    background.setStroke(getResources().getDimensionPixelSize(R.dimen.quote_outline_width),
-                         author.getColor().toQuoteOutlineColor(getContext(), outgoing));
   }
 
   private void setQuoteText(@Nullable String body, @NonNull SlideDeck attachments) {
