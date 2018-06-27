@@ -36,11 +36,6 @@
     <dimen name="quote_corner_radius_bottom">4dp</dimen>
     <dimen name="quote_outline_width">1dp</dimen>
 
-    <dimen name="delivery_status_diameter">8dp</dimen>
-    <dimen name="delivery_status_radius">4dp</dimen>
-    <dimen name="delivery_status_ring_radius">3dp</dimen>
-    <dimen name="delivery_status_ring_thickness">1dp</dimen>
-
     <integer name="media_overview_cols">3</integer>
     <dimen name="message_details_table_row_pad">10dp</dimen>
 

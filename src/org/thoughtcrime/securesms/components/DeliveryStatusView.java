@@ -9,18 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.thoughtcrime.securesms.R;
 
 import pl.tajchert.sample.DotsTextView;
 
-public class DeliveryStatusView extends LinearLayout {
+public class DeliveryStatusView extends FrameLayout {
 
   private static final String TAG = DeliveryStatusView.class.getSimpleName();
 
-  private final TextView  deliveryText;
   private final ViewGroup pendingIndicatorStub;
   private final ImageView sentIndicator;
   private final ImageView deliveredIndicator;
@@ -39,21 +37,29 @@ public class DeliveryStatusView extends LinearLayout {
 
     inflate(context, R.layout.delivery_status_view, this);
 
-    this.deliveryText         = findViewById(R.id.delivery_text);
-    this.deliveredIndicator   = findViewById(R.id.delivered_indicator);
-    this.sentIndicator        = findViewById(R.id.sent_indicator);
-    this.pendingIndicatorStub = findViewById(R.id.pending_indicator_stub);
-    this.readIndicator        = findViewById(R.id.read_indicator);
+    this.deliveredIndicator   = (ImageView) findViewById(R.id.delivered_indicator);
+    this.sentIndicator        = (ImageView) findViewById(R.id.sent_indicator);
+    this.pendingIndicatorStub = (ViewGroup) findViewById(R.id.pending_indicator_stub);
+    this.readIndicator        = (ImageView) findViewById(R.id.read_indicator);
 
     int iconColor = Color.GRAY;
 
+    if (attrs != null) {
+      TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.DeliveryStatusView, 0, 0);
+      iconColor = typedArray.getColor(R.styleable.DeliveryStatusView_iconColor, iconColor);
+      typedArray.recycle();
+    }
+
+    deliveredIndicator.setColorFilter(iconColor, android.graphics.PorterDuff.Mode.MULTIPLY);
+    sentIndicator.setColorFilter(iconColor, android.graphics.PorterDuff.Mode.MULTIPLY);
+
     if (Build.VERSION.SDK_INT >= 11) {
       inflate(context, R.layout.conversation_item_pending_v11, pendingIndicatorStub);
-      DotsTextView pendingIndicator = findViewById(R.id.pending_indicator);
+      DotsTextView pendingIndicator = (DotsTextView) findViewById(R.id.pending_indicator);
       pendingIndicator.setDotsColor(iconColor);
     } else {
       inflate(context, R.layout.conversation_item_pending, pendingIndicatorStub);
-      TextView pendingIndicator = findViewById(R.id.pending_indicator);
+      TextView pendingIndicator = (TextView) findViewById(R.id.pending_indicator);
       pendingIndicator.setTextColor(iconColor);
     }
   }
@@ -64,7 +70,6 @@ public class DeliveryStatusView extends LinearLayout {
 
   public void setPending() {
     this.setVisibility(View.VISIBLE);
-    deliveryText.setText(R.string.DeliveryStatus_sending);
     pendingIndicatorStub.setVisibility(View.VISIBLE);
     sentIndicator.setVisibility(View.GONE);
     deliveredIndicator.setVisibility(View.GONE);
@@ -73,7 +78,6 @@ public class DeliveryStatusView extends LinearLayout {
 
   public void setSent() {
     this.setVisibility(View.VISIBLE);
-    deliveryText.setText(R.string.DeliveryStatus_sent);
     pendingIndicatorStub.setVisibility(View.GONE);
     sentIndicator.setVisibility(View.VISIBLE);
     deliveredIndicator.setVisibility(View.GONE);
@@ -82,7 +86,6 @@ public class DeliveryStatusView extends LinearLayout {
 
   public void setDelivered() {
     this.setVisibility(View.VISIBLE);
-    deliveryText.setText(R.string.DeliveryStatus_delivered);
     pendingIndicatorStub.setVisibility(View.GONE);
     sentIndicator.setVisibility(View.GONE);
     deliveredIndicator.setVisibility(View.VISIBLE);
@@ -91,7 +94,6 @@ public class DeliveryStatusView extends LinearLayout {
 
   public void setRead() {
     this.setVisibility(View.VISIBLE);
-    deliveryText.setText(R.string.DeliveryStatus_read);
     pendingIndicatorStub.setVisibility(View.GONE);
     sentIndicator.setVisibility(View.GONE);
     deliveredIndicator.setVisibility(View.GONE);
