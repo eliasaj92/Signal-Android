@@ -144,7 +144,7 @@
 
         <item name="conversation_group_member_name">#99000000</item>
 
-        <item name="conversation_background">@color/gray5</item>
+        <item name="conversation_background">@color/core_white</item>
         <item name="conversation_editor_background">#22000000</item>
         <item name="conversation_editor_text_color">#ff111111</item>
         <item name="conversation_transport_sms_indicator">@drawable/ic_send_sms_insecure</item>
@@ -183,7 +183,7 @@
         <item name="emoji_category_emoticons">@drawable/emoji_category_emoticons_light</item>
 
 
-        <item name="conversation_item_bubble_background">@color/white</item>
+        <item name="conversation_item_bubble_background">@color/core_light_10</item>
         <item name="conversation_item_sent_text_primary_color">@color/grey_800</item>
         <item name="conversation_item_sent_text_secondary_color">@color/grey_900</item>
         <item name="conversation_item_sent_text_indicator_tab_color">#99000000</item>
