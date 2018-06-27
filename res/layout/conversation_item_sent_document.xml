@@ -6,7 +6,5 @@
         android:id="@+id/document_view"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
-        app:documentForegroundTintColor="@color/grey_500"
-        app:documentBackgroundTintColor="@color/white"
         android:visibility="gone"
         tools:visibility="visible"/>

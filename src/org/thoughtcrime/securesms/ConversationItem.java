@@ -343,10 +343,6 @@ public class ConversationItem extends LinearLayout
     if (audioViewStub.resolved()) {
       setAudioViewTint(messageRecord, conversationRecipient);
     }
-
-    if (documentViewStub.resolved()) {
-      setDocumentViewTint(messageRecord, conversationRecipient);
-    }
   }
 
   private void setAudioViewTint(MessageRecord messageRecord, Recipient recipient) {
@@ -358,18 +354,6 @@ public class ConversationItem extends LinearLayout
       }
     } else {
       audioViewStub.get().setTint(Color.WHITE, recipient.getColor().toConversationColor(context));
-    }
-  }
-
-  private void setDocumentViewTint(MessageRecord messageRecord, Recipient recipient) {
-    if (messageRecord.isOutgoing()) {
-      if (DynamicTheme.LIGHT.equals(TextSecurePreferences.getTheme(context))) {
-        documentViewStub.get().setTint(recipient.getColor().toConversationColor(context), defaultBubbleColor);
-      } else {
-        documentViewStub.get().setTint(Color.WHITE, defaultBubbleColor);
-      }
-    } else {
-      documentViewStub.get().setTint(Color.WHITE, recipient.getColor().toConversationColor(context));
     }
   }
 
@@ -731,7 +715,6 @@ public class ConversationItem extends LinearLayout
       setContactPhoto(recipient);
       setGroupMessageStatus(messageRecord, recipient);
       setAudioViewTint(messageRecord, conversationRecipient);
-      setDocumentViewTint(messageRecord, conversationRecipient);
     });
   }
 
