@@ -23,6 +23,10 @@
     <dimen name="message_bubble_horizontal_padding">12dp</dimen>
     <dimen name="message_bubble_top_padding">12dp</dimen>
     <dimen name="message_bubble_quote_padding">6dp</dimen>
+    <dimen name="message_bubble_edge_margin">48dp</dimen>
+    <dimen name="message_bubble_bottom_padding">8dp</dimen>
+    <dimen name="message_bubble_footer_top_padding">4dp</dimen>
+    <dimen name="message_bubble_footer_image_displacement">-22dp</dimen>
     <dimen name="media_bubble_remove_button_size">24dp</dimen>
     <dimen name="media_bubble_edit_button_size">24dp</dimen>
     <dimen name="media_bubble_default_dimens">210dp</dimen>
@@ -30,6 +34,13 @@
     <dimen name="media_bubble_max_width">250dp</dimen>
     <dimen name="media_bubble_min_height">100dp</dimen>
     <dimen name="media_bubble_max_height">320dp</dimen>
+
+    <dimen name="conversation_individual_right_gutter">16dp</dimen>
+    <dimen name="conversation_individual_left_gutter">16dp</dimen>
+    <dimen name="conversation_group_right_gutter">16dp</dimen>
+    <dimen name="conversation_group_left_gutter">40dp</dimen>
+    <dimen name="conversation_vertical_message_spacing_default">12dp</dimen>
+    <dimen name="conversation_vertical_message_spacing_collapse">2dp</dimen>
 
     <dimen name="quote_corner_radius">3dp</dimen>
     <dimen name="quote_corner_radius_top">10dp</dimen>

@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/Signal.Text.Body"
                     android:ellipsize="end"
-                    android:maxLines="3"
+                    android:maxLines="2"
                     tools:text="With great power comes great responsibility."
                     tools:visibility="visible" />
 
@@ -79,12 +79,12 @@
 
             <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
                 
                 <ImageView
                     android:id="@+id/quote_attachment"
                     android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:visibility="gone"
                     tools:visibility="gone" />
@@ -92,7 +92,7 @@
                 <ImageView
                     android:id="@+id/quote_video_overlay"
                     android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:padding="18dp"
                     android:src="@drawable/ic_play_arrow_white_24dp"

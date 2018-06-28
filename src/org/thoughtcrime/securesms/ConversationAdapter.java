@@ -48,6 +48,7 @@ import org.thoughtcrime.securesms.util.LRUCache;
 import org.thoughtcrime.securesms.util.StickyHeaderDecoration;
 import org.thoughtcrime.securesms.util.Util;
 import org.thoughtcrime.securesms.util.ViewUtil;
+import org.whispersystems.libsignal.util.guava.Optional;
 
 import java.lang.ref.SoftReference;
 import java.security.MessageDigest;
@@ -189,12 +190,24 @@ public class ConversationAdapter <V extends View & BindableConversationItem>
   }
 
   @Override
-  protected void onBindItemViewHolder(ViewHolder viewHolder, @NonNull MessageRecord messageRecord) {
-    long start = System.currentTimeMillis();
-    viewHolder.getView().bind(messageRecord, glideRequests, locale, batchSelected, recipient, messageRecord == recordToPulseHighlight);
+  protected void onBindItemViewHolder(ViewHolder viewHolder, @NonNull MessageRecord messageRecord, int position) {
+    long          start          = System.currentTimeMillis();
+    MessageRecord previousRecord = position < getItemCount() - 1 ? getRecordForPositionOrThrow(position + 1) : null;
+    MessageRecord nextRecord     = position > 0 ? getRecordForPositionOrThrow(position - 1) : null;
+
+    viewHolder.getView().bind(messageRecord,
+                              Optional.fromNullable(previousRecord),
+                              Optional.fromNullable(nextRecord),
+                              glideRequests,
+                              locale,
+                              batchSelected,
+                              recipient,
+                              messageRecord == recordToPulseHighlight);
+
     if (messageRecord == recordToPulseHighlight) {
       recordToPulseHighlight = null;
     }
+
     Log.w(TAG, "Bind time: " + (System.currentTimeMillis() - start));
   }
 

@@ -10,6 +10,8 @@
         android:adjustViewBounds="true"
         android:contentDescription="@string/conversation_item__mms_image_description"
         android:visibility="gone"
+        android:elevation="8dp"
+        android:background="@drawable/thumbnail_background"
         app:minWidth="@dimen/media_bubble_min_width"
         app:maxWidth="@dimen/media_bubble_max_width"
         app:minHeight="@dimen/media_bubble_min_height"
