@@ -43,7 +43,6 @@
 
     <style name="Signal.Text.Caption.MessageImageOverlay">
         <item name="android:textColor">@color/core_white</item>
-        <item name="android:shadowColor">@color/core_black</item>
-        <item name="android:shadowRadius">2</item>
     </style>
+
 </resources>

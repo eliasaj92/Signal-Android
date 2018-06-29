@@ -219,7 +219,8 @@ public class ConversationItem extends LinearLayout
     this.recipient.addListener(this);
     this.conversationRecipient.addListener(this);
 
-    this.footer.getLayoutParams().width = LayoutParams.WRAP_CONTENT;
+    updateLayoutParams(footer, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+    dateText.forceLayout();
 
     setMediaAttributes(messageRecord, conversationRecipient);
     setInteractionState(messageRecord, pulseHighlight);
@@ -291,7 +292,7 @@ public class ConversationItem extends LinearLayout
     }
 
     int availableWidth = getAvailableMessageBubbleWidth(footer);
-    if (footer.getMeasuredWidth() < availableWidth) {
+    if (footer.getMeasuredWidth() != availableWidth) {
       footer.getLayoutParams().width = availableWidth;
       needsMeasure = true;
     }
@@ -311,7 +312,7 @@ public class ConversationItem extends LinearLayout
       availableWidth = bodyBubble.getMeasuredWidth() - bodyBubble.getPaddingLeft() - bodyBubble.getPaddingRight();
     }
 
-    availableWidth -=  getLeftMargin(forView) + getRightMargin(forView);
+    availableWidth -= getLeftMargin(forView) + getRightMargin(forView);
 
     return availableWidth;
   }
@@ -492,6 +493,7 @@ public class ConversationItem extends LinearLayout
       mediaThumbnailStub.get().setDownloadClickListener(downloadClickListener);
       mediaThumbnailStub.get().setOnLongClickListener(passthroughClickListener);
       mediaThumbnailStub.get().setOnClickListener(passthroughClickListener);
+      mediaThumbnailStub.get().showShade(true);
 
       updateLayoutParams(bodyText, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
@@ -686,11 +688,16 @@ public class ConversationItem extends LinearLayout
   }
 
   private void setMessageSpacing(@NonNull MessageRecord current, @NonNull Optional<MessageRecord> next) {
-    if (next.isPresent() && current.getRecipient().getAddress().equals(next.get().getRecipient().getAddress())) {
-      setPaddingBottom(this, readDimen(R.dimen.conversation_vertical_message_spacing_collapse));
-    } else {
-      setPaddingBottom(this, readDimen(R.dimen.conversation_vertical_message_spacing_default));
+    if (next.isPresent()) {
+      boolean recipientsMatch = current.getRecipient().getAddress().equals(next.get().getRecipient().getAddress());
+      boolean outgoingMatch   = current.isOutgoing() == next.get().isOutgoing();
+
+      if (!recipientsMatch || !outgoingMatch) {
+        setPaddingBottom(this, readDimen(R.dimen.conversation_vertical_message_spacing_default));
+        return;
+      }
     }
+    setPaddingBottom(this, readDimen(R.dimen.conversation_vertical_message_spacing_collapse));
   }
 
   private void setMessageMargins(@NonNull MessageRecord message, boolean isGroupThread) {

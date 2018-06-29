@@ -19,7 +19,7 @@ public class DeliveryStatusView extends FrameLayout {
 
   private static final String TAG = DeliveryStatusView.class.getSimpleName();
 
-  private final ViewGroup pendingIndicatorStub;
+  private final ImageView pendingIndicator;
   private final ImageView sentIndicator;
   private final ImageView deliveredIndicator;
   private final ImageView readIndicator;
@@ -37,10 +37,10 @@ public class DeliveryStatusView extends FrameLayout {
 
     inflate(context, R.layout.delivery_status_view, this);
 
-    this.deliveredIndicator   = (ImageView) findViewById(R.id.delivered_indicator);
-    this.sentIndicator        = (ImageView) findViewById(R.id.sent_indicator);
-    this.pendingIndicatorStub = (ViewGroup) findViewById(R.id.pending_indicator_stub);
-    this.readIndicator        = (ImageView) findViewById(R.id.read_indicator);
+    this.deliveredIndicator   = findViewById(R.id.delivered_indicator);
+    this.sentIndicator        = findViewById(R.id.sent_indicator);
+    this.pendingIndicator     = findViewById(R.id.pending_indicator);
+    this.readIndicator        = findViewById(R.id.read_indicator);
 
     int iconColor = Color.GRAY;
 
@@ -50,18 +50,9 @@ public class DeliveryStatusView extends FrameLayout {
       typedArray.recycle();
     }
 
+    pendingIndicator.setColorFilter(iconColor, android.graphics.PorterDuff.Mode.MULTIPLY);
     deliveredIndicator.setColorFilter(iconColor, android.graphics.PorterDuff.Mode.MULTIPLY);
     sentIndicator.setColorFilter(iconColor, android.graphics.PorterDuff.Mode.MULTIPLY);
-
-    if (Build.VERSION.SDK_INT >= 11) {
-      inflate(context, R.layout.conversation_item_pending_v11, pendingIndicatorStub);
-      DotsTextView pendingIndicator = (DotsTextView) findViewById(R.id.pending_indicator);
-      pendingIndicator.setDotsColor(iconColor);
-    } else {
-      inflate(context, R.layout.conversation_item_pending, pendingIndicatorStub);
-      TextView pendingIndicator = (TextView) findViewById(R.id.pending_indicator);
-      pendingIndicator.setTextColor(iconColor);
-    }
   }
 
   public void setNone() {
@@ -70,7 +61,7 @@ public class DeliveryStatusView extends FrameLayout {
 
   public void setPending() {
     this.setVisibility(View.VISIBLE);
-    pendingIndicatorStub.setVisibility(View.VISIBLE);
+    pendingIndicator.setVisibility(View.VISIBLE);
     sentIndicator.setVisibility(View.GONE);
     deliveredIndicator.setVisibility(View.GONE);
     readIndicator.setVisibility(View.GONE);
@@ -78,7 +69,7 @@ public class DeliveryStatusView extends FrameLayout {
 
   public void setSent() {
     this.setVisibility(View.VISIBLE);
-    pendingIndicatorStub.setVisibility(View.GONE);
+    pendingIndicator.setVisibility(View.GONE);
     sentIndicator.setVisibility(View.VISIBLE);
     deliveredIndicator.setVisibility(View.GONE);
     readIndicator.setVisibility(View.GONE);
@@ -86,7 +77,7 @@ public class DeliveryStatusView extends FrameLayout {
 
   public void setDelivered() {
     this.setVisibility(View.VISIBLE);
-    pendingIndicatorStub.setVisibility(View.GONE);
+    pendingIndicator.setVisibility(View.GONE);
     sentIndicator.setVisibility(View.GONE);
     deliveredIndicator.setVisibility(View.VISIBLE);
     readIndicator.setVisibility(View.GONE);
@@ -94,7 +85,7 @@ public class DeliveryStatusView extends FrameLayout {
 
   public void setRead() {
     this.setVisibility(View.VISIBLE);
-    pendingIndicatorStub.setVisibility(View.GONE);
+    pendingIndicator.setVisibility(View.GONE);
     sentIndicator.setVisibility(View.GONE);
     deliveredIndicator.setVisibility(View.GONE);
     readIndicator.setVisibility(View.VISIBLE);

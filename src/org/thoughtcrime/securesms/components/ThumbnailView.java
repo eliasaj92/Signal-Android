@@ -48,6 +48,7 @@ public class ThumbnailView extends FrameLayout {
   private static final int    MAX_HEIGHT = 3;
 
   private ImageView       image;
+  private ImageView       shade;
   private ImageView       playOverlay;
   private int             backgroundColorHint;
   private int             radius;
@@ -78,6 +79,7 @@ public class ThumbnailView extends FrameLayout {
     this.radius      = getResources().getDimensionPixelSize(R.dimen.message_bubble_corner_radius);
     this.image       = findViewById(R.id.thumbnail_image);
     this.playOverlay = findViewById(R.id.play_overlay);
+    this.shade       = findViewById(R.id.shade);
     super.setOnClickListener(new ThumbnailClickDispatcher());
 
     if (attrs != null) {
@@ -212,6 +214,10 @@ public class ThumbnailView extends FrameLayout {
 
   public void setBackgroundColorHint(int color) {
     this.backgroundColorHint = color;
+  }
+
+  public void showShade(boolean showShade) {
+    shade.setVisibility(showShade ? VISIBLE : GONE);
   }
 
   @UiThread
