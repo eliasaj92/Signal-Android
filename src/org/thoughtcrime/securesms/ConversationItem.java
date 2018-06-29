@@ -85,6 +85,7 @@ import org.thoughtcrime.securesms.util.DynamicTheme;
 import org.thoughtcrime.securesms.util.LongClickCopySpan;
 import org.thoughtcrime.securesms.util.LongClickMovementMethod;
 import org.thoughtcrime.securesms.util.TextSecurePreferences;
+import org.thoughtcrime.securesms.util.ThemeUtil;
 import org.thoughtcrime.securesms.util.Util;
 import org.thoughtcrime.securesms.util.dualsim.SubscriptionInfoCompat;
 import org.thoughtcrime.securesms.util.dualsim.SubscriptionManagerCompat;
@@ -442,6 +443,7 @@ public class ConversationItem extends LinearLayout
     setTopMargin(footer, readDimen(R.dimen.message_bubble_footer_top_padding));
     setBottomMargin(footer, readDimen(R.dimen.message_bubble_bottom_padding));
     dateText.setTextAppearance(context, messageRecord.isOutgoing() ? R.style.Signal_Text_Caption_MessageSent : R.style.Signal_Text_Caption_MessageReceived);
+    deliveryStatusIndicator.setTint(ThemeUtil.getThemedColor(context, R.attr.conversation_item_sent_text_secondary_color));
 
     if (hasSharedContact(messageRecord)) {
       sharedContactStub.get().setVisibility(VISIBLE);
@@ -507,6 +509,7 @@ public class ConversationItem extends LinearLayout
         setTopMargin(footer, readDimen(R.dimen.message_bubble_footer_image_displacement));
         setBottomMargin(footer, 0);
         dateText.setTextAppearance(context, R.style.Signal_Text_Caption_MessageImageOverlay);
+        deliveryStatusIndicator.setTint(getContext().getResources().getColor(R.color.core_white));
       }
     } else {
       if (mediaThumbnailStub.resolved()) mediaThumbnailStub.get().setVisibility(View.GONE);

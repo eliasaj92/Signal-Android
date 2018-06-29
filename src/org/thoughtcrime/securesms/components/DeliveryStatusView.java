@@ -90,4 +90,10 @@ public class DeliveryStatusView extends FrameLayout {
     deliveredIndicator.setVisibility(View.GONE);
     readIndicator.setVisibility(View.VISIBLE);
   }
+
+  public void setTint(int color) {
+    pendingIndicator.setColorFilter(color, android.graphics.PorterDuff.Mode.MULTIPLY);
+    deliveredIndicator.setColorFilter(color, android.graphics.PorterDuff.Mode.MULTIPLY);
+    sentIndicator.setColorFilter(color, android.graphics.PorterDuff.Mode.MULTIPLY);
+  }
 }
