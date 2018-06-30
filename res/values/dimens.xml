@@ -26,7 +26,11 @@
     <dimen name="message_bubble_edge_margin">48dp</dimen>
     <dimen name="message_bubble_bottom_padding">8dp</dimen>
     <dimen name="message_bubble_footer_top_padding">4dp</dimen>
-    <dimen name="message_bubble_footer_image_displacement">-22dp</dimen>
+    <dimen name="message_bubble_footer_image_displacement_dp">-8dp</dimen>
+    <dimen name="message_bubble_footer_image_displacement_sp">-16sp</dimen>
+    <dimen name="message_bubble_footer_shared_contact_displacement_dp">-24dp</dimen>
+    <dimen name="message_bubble_footer_shared_contact_displacement_sp">-38sp</dimen>
+    <dimen name="message_bubble_bottom_padding_shared_contact_displacement">-1dp</dimen>
     <dimen name="media_bubble_remove_button_size">24dp</dimen>
     <dimen name="media_bubble_edit_button_size">24dp</dimen>
     <dimen name="media_bubble_default_dimens">210dp</dimen>

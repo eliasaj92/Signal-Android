@@ -440,6 +440,7 @@ public class ConversationItem extends LinearLayout
 
     updateLayoutParams(bodyText, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     setPaddingTop(bodyBubble, readDimen(R.dimen.message_bubble_top_padding));
+    setPaddingBottom(bodyBubble, 0);
     setTopMargin(footer, readDimen(R.dimen.message_bubble_footer_top_padding));
     setBottomMargin(footer, readDimen(R.dimen.message_bubble_bottom_padding));
     dateText.setTextAppearance(context, messageRecord.isOutgoing() ? R.style.Signal_Text_Caption_MessageSent : R.style.Signal_Text_Caption_MessageReceived);
@@ -455,6 +456,10 @@ public class ConversationItem extends LinearLayout
       sharedContactStub.get().setEventListener(sharedContactEventListener);
       sharedContactStub.get().setOnClickListener(sharedContactClickListener);
       sharedContactStub.get().setOnLongClickListener(passthroughClickListener);
+
+      setTopMargin(footer, getSharedContactFooterDisplacement());
+      setBottomMargin(footer, 0);
+      setPaddingBottom(bodyBubble, readDimen(R.dimen.message_bubble_bottom_padding_shared_contact_displacement));
     } else if (hasAudio(messageRecord)) {
       audioViewStub.get().setVisibility(View.VISIBLE);
       if (mediaThumbnailStub.resolved()) mediaThumbnailStub.get().setVisibility(View.GONE);
@@ -506,7 +511,7 @@ public class ConversationItem extends LinearLayout
       }
 
       if (TextUtils.isEmpty(messageRecord.getBody())) {
-        setTopMargin(footer, readDimen(R.dimen.message_bubble_footer_image_displacement));
+        setTopMargin(footer, getImageFooterDisplacement());
         setBottomMargin(footer, 0);
         dateText.setTextAppearance(context, R.style.Signal_Text_Caption_MessageImageOverlay);
         deliveryStatusIndicator.setTint(getContext().getResources().getColor(R.color.core_white));
@@ -746,6 +751,16 @@ public class ConversationItem extends LinearLayout
 
   private int readDimen(@DimenRes int dimenId) {
     return context.getResources().getDimensionPixelOffset(dimenId);
+  }
+
+  private int getImageFooterDisplacement() {
+    return readDimen(R.dimen.message_bubble_footer_image_displacement_dp) +
+           readDimen(R.dimen.message_bubble_footer_image_displacement_sp);
+  }
+
+  private int getSharedContactFooterDisplacement() {
+    return readDimen(R.dimen.message_bubble_footer_shared_contact_displacement_dp) +
+           readDimen(R.dimen.message_bubble_footer_shared_contact_displacement_sp);
   }
 
   private void setFailedStatusIcons() {

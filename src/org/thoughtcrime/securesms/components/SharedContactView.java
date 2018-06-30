@@ -1,6 +1,8 @@
 package org.thoughtcrime.securesms.components;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -48,32 +50,42 @@ public class SharedContactView extends LinearLayout implements RecipientModified
 
   public SharedContactView(Context context) {
     super(context);
-    initialize();
+    initialize(null);
   }
 
   public SharedContactView(Context context, @Nullable AttributeSet attrs) {
     super(context, attrs);
-    initialize();
+    initialize(attrs);
   }
 
   public SharedContactView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
-    initialize();
+    initialize(attrs);
   }
 
   @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   public SharedContactView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
     super(context, attrs, defStyleAttr, defStyleRes);
-    initialize();
+    initialize(attrs);
   }
 
-  private void initialize() {
+  private void initialize(@Nullable AttributeSet attrs) {
     inflate(getContext(), R.layout.shared_contact_view, this);
 
     avatarView       = findViewById(R.id.contact_avatar);
     nameView         = findViewById(R.id.contact_name);
     numberView       = findViewById(R.id.contact_number);
     actionButtonView = findViewById(R.id.contact_action_button);
+
+    if (attrs != null) {
+      TypedArray typedArray   = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.SharedContactView, 0, 0);
+      int        titleColor   = typedArray.getInt(R.styleable.SharedContactView_title_color, Color.BLACK);
+      int        captionColor = typedArray.getInt(R.styleable.SharedContactView_caption_color, Color.BLACK);
+      typedArray.recycle();
+
+      nameView.setTextColor(titleColor);
+      numberView.setTextColor(captionColor);
+    }
   }
 
   public void setContact(@NonNull Contact contact, @NonNull GlideRequests glideRequests, @NonNull Locale locale) {

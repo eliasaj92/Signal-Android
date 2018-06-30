@@ -61,11 +61,9 @@
 
             <ViewStub
                 android:id="@+id/shared_contact_view_stub"
-                android:layout="@layout/conversation_item_shared_contact"
-                android:layout_width="@dimen/media_bubble_max_width"
+                android:layout="@layout/conversation_item_sent_shared_contact"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/message_bubble_horizontal_padding"
-                android:layout_marginRight="@dimen/message_bubble_horizontal_padding"
                 android:visibility="gone"/>
 
             <ViewStub
