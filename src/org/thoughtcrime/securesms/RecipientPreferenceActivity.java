@@ -347,8 +347,10 @@ public class RecipientPreferenceActivity extends PassphraseRequiredActionBarActi
       vibrateCallPreference.setSummary(vibrateCallSummary.first);
       vibrateCallPreference.setValueIndex(vibrateCallSummary.second);
 
+      colorPreference.setColors(MaterialColors.CONVERSATION_PALETTE.asConversationColorArray(getActivity()));
+      colorPreference.setColor(recipient.getColor().toActionBarColor(getActivity()));
+
       if (recipient.isGroupRecipient()) {
-        if (colorPreference    != null) colorPreference.setVisible(false);
         if (blockPreference    != null) blockPreference.setVisible(false);
         if (identityPreference != null) identityPreference.setVisible(false);
         if (privacyCategory    != null) privacyCategory.setVisible(false);

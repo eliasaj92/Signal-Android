@@ -226,7 +226,7 @@ public class ConversationItem extends LinearLayout
     setMediaAttributes(messageRecord, conversationRecipient);
     setInteractionState(messageRecord, pulseHighlight);
     setBodyText(messageRecord);
-    setBubbleState(messageRecord, recipient);
+    setBubbleState(messageRecord, conversationRecipient);
     setStatusIcons(messageRecord);
     setContactPhoto(recipient);
     setGroupMessageStatus(messageRecord, recipient);
@@ -341,18 +341,18 @@ public class ConversationItem extends LinearLayout
 
   /// MessageRecord Attribute Parsers
 
-  private void setBubbleState(MessageRecord messageRecord, Recipient recipient) {
+  private void setBubbleState(MessageRecord messageRecord, Recipient conversationRecipient) {
     if (messageRecord.isOutgoing()) {
       bodyBubble.getBackground().setColorFilter(defaultBubbleColor, PorterDuff.Mode.MULTIPLY);
       if (mediaThumbnailStub.resolved()) mediaThumbnailStub.get().setBackgroundColorHint(defaultBubbleColor);
     } else {
-      int color = recipient.getColor().toConversationColor(context);
+      int color = conversationRecipient.getColor().toConversationColor(context);
       bodyBubble.getBackground().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
       if (mediaThumbnailStub.resolved()) mediaThumbnailStub.get().setBackgroundColorHint(color);
     }
 
     if (audioViewStub.resolved()) {
-      setAudioViewTint(messageRecord, conversationRecipient);
+      setAudioViewTint(messageRecord, this.conversationRecipient);
     }
   }
 
@@ -825,7 +825,7 @@ public class ConversationItem extends LinearLayout
   @Override
   public void onModified(final Recipient modified) {
     Util.runOnMain(() -> {
-      setBubbleState(messageRecord, recipient);
+      setBubbleState(messageRecord, conversationRecipient);
       setContactPhoto(recipient);
       setGroupMessageStatus(messageRecord, recipient);
       setAudioViewTint(messageRecord, conversationRecipient);

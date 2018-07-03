@@ -12,20 +12,16 @@ import java.util.Map;
 import static org.thoughtcrime.securesms.util.ThemeUtil.isDarkTheme;
 
 public enum MaterialColor {
-  RED        (R.color.conversation_red,         R.color.red_700,         "red"),
-  PINK       (R.color.conversation_pink,        R.color.pink_700,        "pink"),
+  RED        (R.color.conversation_red,         R.color.red_900,         "red"),
+  PINK       (R.color.conversation_pink,        R.color.pink_800,        "pink"),
   PURPLE     (R.color.conversation_purple,      R.color.purple_700,      "purple"),
-  INDIGO     (R.color.conversation_indigo,      R.color.indigo_700,      "indigo"),
-  BLUE       (R.color.conversation_blue,        R.color.blue_700,        "blue"),
-  CYAN       (R.color.conversation_cyan,        R.color.cyan_700,        "cyan"),
-  TEAL       (R.color.conversation_teal,        R.color.teal_700,        "teal"),
-  GREEN      (R.color.conversation_green,       R.color.green_700,       "green"),
-  ORANGE     (R.color.conversation_orange,      R.color.deep_orange_700, "orange"),
-  GREY       (R.color.conversation_grey,        R.color.grey_700,        "grey"),
-
-  GROUP      (GREY.conversationColorLight, R.color.textsecure_primary, R.color.textsecure_primary_dark,
-              GREY.conversationColorDark, R.color.gray95, R.color.black,
-              "group_color");
+  INDIGO     (R.color.conversation_indigo,      R.color.indigo_800,      "indigo"),
+  BLUE       (R.color.conversation_blue,        R.color.blue_900,        "blue"),
+  CYAN       (R.color.conversation_cyan,        R.color.cyan_900,        "cyan"),
+  TEAL       (R.color.conversation_teal,        R.color.teal_800,        "teal"),
+  GREEN      (R.color.conversation_green,       R.color.green_900,       "green"),
+  ORANGE     (R.color.conversation_orange,      R.color.deep_orange_900, "orange"),
+  GREY       (R.color.conversation_grey,        R.color.grey_700,        "grey");
 
   private static Map<String, MaterialColor> colorMap = new HashMap<String, MaterialColor>() {{
     put("red", RED);
@@ -47,7 +43,7 @@ public enum MaterialColor {
     put("deep_orange", ORANGE);
     put("yellow", ORANGE);
     put("grey", GREY);
-    put("group_color", GROUP);
+    put("group_color", BLUE);
   }};
 
   private final int conversationColorLight;

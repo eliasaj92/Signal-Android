@@ -11,15 +11,15 @@ import java.util.List;
 public class MaterialColors {
 
   public static final MaterialColorList CONVERSATION_PALETTE = new MaterialColorList(new ArrayList<>(Arrays.asList(
+    MaterialColor.ORANGE,
     MaterialColor.RED,
     MaterialColor.PINK,
     MaterialColor.PURPLE,
     MaterialColor.INDIGO,
     MaterialColor.BLUE,
-    MaterialColor.CYAN,
-    MaterialColor.TEAL,
     MaterialColor.GREEN,
-    MaterialColor.ORANGE
+    MaterialColor.TEAL,
+    MaterialColor.CYAN
   )));
 
   public static class MaterialColorList {
