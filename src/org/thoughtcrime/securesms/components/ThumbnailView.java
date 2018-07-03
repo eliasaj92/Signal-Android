@@ -49,7 +49,7 @@ public class ThumbnailView extends FrameLayout {
 
   private ImageView       image;
   private ImageView       shade;
-  private ImageView       playOverlay;
+  private View            playOverlay;
   private int             backgroundColorHint;
   private int             radius;
   private OnClickListener parentClickListener;

@@ -54,7 +54,7 @@ public class QuoteView extends LinearLayout implements RecipientModifiedListener
   private TextView  bodyView;
   private ImageView quoteBarView;
   private ImageView attachmentView;
-  private ImageView attachmentVideoOverlayView;
+  private View      attachmentVideoOverlayView;
   private ViewGroup attachmentIconContainerView;
   private ImageView attachmentIconView;
   private ImageView attachmentIconBackgroundView;
