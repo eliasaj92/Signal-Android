@@ -94,7 +94,7 @@
                 android:layout_marginLeft="@dimen/message_bubble_quote_padding"
                 android:layout_marginRight="@dimen/message_bubble_quote_padding"
                 android:visibility="gone"
-                app:message_type="outgoing"
+                app:message_type="incoming"
                 tools:visibility="visible"/>
 
             <ViewStub

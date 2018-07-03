@@ -5,5 +5,5 @@
     android:id="@+id/shared_contact_view"
     android:layout_width="@dimen/media_bubble_default_dimens"
     android:layout_height="wrap_content"
-    app:title_color="?conversation_item_sent_text_primary_color"
-    app:caption_color="?conversation_item_sent_text_secondary_color"/>
+    app:contact_titleColor="?conversation_item_sent_text_primary_color"
+    app:contact_captionColor="?conversation_item_sent_text_secondary_color"/>

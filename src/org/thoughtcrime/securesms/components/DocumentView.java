@@ -65,6 +65,16 @@ public class DocumentView extends FrameLayout {
     this.fileName         = findViewById(R.id.file_name);
     this.fileSize         = findViewById(R.id.file_size);
     this.document         = findViewById(R.id.document);
+
+    if (attrs != null) {
+      TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.DocumentView, 0, 0);
+      int        titleColor   = typedArray.getInt(R.styleable.DocumentView_doc_titleColor, Color.BLACK);
+      int        captionColor = typedArray.getInt(R.styleable.DocumentView_doc_captionColor, Color.BLACK);
+      typedArray.recycle();
+
+      fileName.setTextColor(titleColor);
+      fileSize.setTextColor(captionColor);
+    }
   }
 
   public void setDownloadClickListener(@Nullable SlideClickListener listener) {

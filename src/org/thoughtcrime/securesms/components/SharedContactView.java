@@ -79,8 +79,8 @@ public class SharedContactView extends LinearLayout implements RecipientModified
 
     if (attrs != null) {
       TypedArray typedArray   = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.SharedContactView, 0, 0);
-      int        titleColor   = typedArray.getInt(R.styleable.SharedContactView_title_color, Color.BLACK);
-      int        captionColor = typedArray.getInt(R.styleable.SharedContactView_caption_color, Color.BLACK);
+      int        titleColor   = typedArray.getInt(R.styleable.SharedContactView_contact_titleColor, Color.BLACK);
+      int        captionColor = typedArray.getInt(R.styleable.SharedContactView_contact_captionColor, Color.BLACK);
       typedArray.recycle();
 
       nameView.setTextColor(titleColor);

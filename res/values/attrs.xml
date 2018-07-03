@@ -249,8 +249,13 @@
     </declare-styleable>
 
     <declare-styleable name="SharedContactView">
-        <attr name="title_color" format="color" />
-        <attr name="caption_color" format="color" />
+        <attr name="contact_titleColor" format="color" />
+        <attr name="contact_captionColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="DocumentView">
+        <attr name="doc_titleColor" format="color" />
+        <attr name="doc_captionColor" format="color" />
     </declare-styleable>
 
 </resources>
