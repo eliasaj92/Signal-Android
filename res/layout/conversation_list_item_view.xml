@@ -49,7 +49,8 @@
                   android:layout_alignParentStart="true"
                   android:layout_toLeftOf="@+id/thumbnail"
                   android:layout_toStartOf="@+id/thumbnail"
-                  android:textAppearance="?android:attr/textAppearanceMedium"
+                  android:textAppearance="@style/Signal.Text.Body"
+                  android:fontFamily="sans-serif-medium"
                   android:textColor="?attr/conversation_list_item_contact_color"
                   android:maxLines="1"
                   tools:text="Jules Bonnot"
@@ -81,9 +82,8 @@
                 android:layout_toLeftOf="@+id/status"
                 android:layout_toStartOf="@+id/status"
                 android:paddingRight="1dp"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textAppearance="@style/Signal.Text.Preview"
                 android:textColor="?attr/conversation_list_item_subject_color"
-                android:fontFamily="sans-serif-light"
                 android:maxLines="1"
                 tools:text="Wheels arrive at 3pm flat. This is a somewhat longer message."
                 android:ellipsize="end" />
@@ -114,9 +114,9 @@
                   android:layout_alignParentEnd="true"
                   android:layout_alignParentTop="true"
                   android:layout_above="@id/subject"
-                  android:textAppearance="?android:attr/textAppearanceSmall"
+                  android:textAppearance="@style/Signal.Text.Caption"
                   android:textColor="?attr/conversation_list_item_date_color"
-                  android:fontFamily="sans-serif-light"
+                  android:textAllCaps="true"
                   tools:text="30 mins"
                   android:singleLine="true"/>
 
@@ -132,8 +132,7 @@
                   android:text="@string/conversation_list_item_view__archived"
                   android:textColor="#ffbbbbbb"
                   android:background="@drawable/rounded_rectangle"
-                  android:textSize="12sp"
-                />
+                  android:textSize="12sp" />
 
 
         <FrameLayout android:id="@+id/status"
@@ -156,6 +155,6 @@
 
         </FrameLayout>
 
-
     </RelativeLayout>
+
 </org.thoughtcrime.securesms.ConversationListItem>
