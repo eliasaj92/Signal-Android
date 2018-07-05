@@ -76,7 +76,7 @@ public class ThumbnailView extends FrameLayout {
 
     inflate(context, R.layout.thumbnail_view, this);
 
-    this.radius      = getResources().getDimensionPixelSize(R.dimen.message_bubble_corner_radius);
+    this.radius      = getResources().getDimensionPixelSize(R.dimen.message_corner_radius);
     this.image       = findViewById(R.id.thumbnail_image);
     this.playOverlay = findViewById(R.id.play_overlay);
     this.shade       = findViewById(R.id.shade);

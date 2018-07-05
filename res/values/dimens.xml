@@ -42,9 +42,9 @@
     <dimen name="conversation_individual_right_gutter">16dp</dimen>
     <dimen name="conversation_individual_left_gutter">16dp</dimen>
     <dimen name="conversation_group_right_gutter">16dp</dimen>
-    <dimen name="conversation_group_left_gutter">40dp</dimen>
-    <dimen name="conversation_vertical_message_spacing_default">12dp</dimen>
-    <dimen name="conversation_vertical_message_spacing_collapse">2dp</dimen>
+    <dimen name="conversation_group_left_gutter">56dp</dimen>
+    <dimen name="conversation_vertical_message_spacing_default">20dp</dimen>
+    <dimen name="conversation_vertical_message_spacing_collapse">4dp</dimen>
 
     <dimen name="quote_corner_radius">3dp</dimen>
     <dimen name="quote_corner_radius_top">10dp</dimen>
