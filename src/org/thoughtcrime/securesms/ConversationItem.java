@@ -726,7 +726,7 @@ public class ConversationItem extends LinearLayout
 
   private void setAuthorTitleVisibility(@NonNull MessageRecord current, @NonNull Optional<MessageRecord> previous, boolean isGroupThread) {
     if (isGroupThread && !current.isOutgoing()) {
-      if (!previous.isPresent() || !current.getRecipient().getAddress().equals(previous.get().getRecipient().getAddress())) {
+      if (!previous.isPresent() || previous.get().isUpdate() || !current.getRecipient().getAddress().equals(previous.get().getRecipient().getAddress())) {
         groupSenderHolder.setVisibility(VISIBLE);
         setPaddingTop(bodyBubble, readDimen(R.dimen.message_bubble_top_padding));
       } else {
@@ -739,7 +739,7 @@ public class ConversationItem extends LinearLayout
 
   private void setAuthorAvatarVisibility(@NonNull MessageRecord current, @NonNull Optional<MessageRecord> next, boolean isGroupThread) {
     if (isGroupThread && !current.isOutgoing()) {
-      if (!next.isPresent() || !current.getRecipient().getAddress().equals(next.get().getRecipient().getAddress())) {
+      if (!next.isPresent() || next.get().isUpdate() || !current.getRecipient().getAddress().equals(next.get().getRecipient().getAddress())) {
         contactPhoto.setVisibility(VISIBLE);
       } else {
         contactPhoto.setVisibility(GONE);

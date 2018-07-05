@@ -174,6 +174,11 @@ public abstract class MessageRecord extends DisplayRecord {
     return SmsDatabase.Types.isInvalidVersionKeyExchange(type);
   }
 
+  public boolean isUpdate() {
+    return isGroupAction() || isCallLog() || isJoined() || isExpirationTimerUpdate() ||
+           isEndSession()  || isIdentityUpdate() || isIdentityVerified() || isIdentityDefault();
+  }
+
   public boolean isMediaPending() {
     return false;
   }
