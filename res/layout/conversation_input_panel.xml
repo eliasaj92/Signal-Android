@@ -141,6 +141,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
                     tools:visibility="gone">
 
@@ -160,14 +161,14 @@
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:clipChildren="true">
 
                         <TextView
                             android:id="@+id/slide_to_cancel"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:gravity="left|start|center_vertical"
                             android:drawableLeft="@drawable/ic_keyboard_arrow_left_grey600_24dp"
                             android:drawableStart="@drawable/ic_keyboard_arrow_left_grey600_24dp"
                             android:textAppearance="@style/Signal.Text.Caption"
@@ -175,10 +176,9 @@
                             android:textAllCaps="true"
                             android:textColor="@color/core_light_60"
                             android:ellipsize="none"
-                            android:singleLine="true"
-                            android:paddingLeft="20dp"
-                            android:paddingStart="20dp"
                             android:visibility="gone"
+                            android:paddingRight="50dp"
+                            android:paddingEnd="50dp"
                             tools:visibility="visible"/>
 
                     </FrameLayout>
