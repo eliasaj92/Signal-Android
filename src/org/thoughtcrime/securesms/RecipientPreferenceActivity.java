@@ -51,6 +51,7 @@ import org.thoughtcrime.securesms.database.RecipientDatabase.VibrateState;
 import org.thoughtcrime.securesms.database.loaders.ThreadMediaLoader;
 import org.thoughtcrime.securesms.jobs.MultiDeviceBlockedUpdateJob;
 import org.thoughtcrime.securesms.jobs.MultiDeviceContactUpdateJob;
+import org.thoughtcrime.securesms.jobs.MultiDeviceGroupUpdateJob;
 import org.thoughtcrime.securesms.mms.GlideApp;
 import org.thoughtcrime.securesms.mms.GlideRequests;
 import org.thoughtcrime.securesms.permissions.Permissions;
@@ -542,7 +543,11 @@ public class RecipientPreferenceActivity extends PassphraseRequiredActionBarActi
             protected Void doInBackground(Void... params) {
               DatabaseFactory.getRecipientDatabase(context).setColor(recipient, selectedColor);
 
-              if (recipient.resolve().getRegistered() == RecipientDatabase.RegisteredState.REGISTERED) {
+              if (recipient.resolve().isGroupRecipient()) {
+                ApplicationContext.getInstance(context)
+                    .getJobManager()
+                    .add(new MultiDeviceGroupUpdateJob(context));
+              } else if (recipient.resolve().getRegistered() == RecipientDatabase.RegisteredState.REGISTERED) {
                 ApplicationContext.getInstance(context)
                                   .getJobManager()
                                   .add(new MultiDeviceContactUpdateJob(context, recipient.getAddress()));
