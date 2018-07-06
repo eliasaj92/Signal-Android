@@ -59,7 +59,7 @@
                               android:background="@drawable/ic_insert_drive_file_white_24dp"
                               android:textAlignment="center"
                               android:scaleType="centerInside"
-                              android:textAppearance="@style/Signal.Text.Caption"
+                              style="@style/Signal.Text.Caption"
                               android:textAllCaps="true"
                               android:textSize="10sp"
                               android:textColor="@color/core_black"
@@ -90,7 +90,7 @@
                 <TextView android:id="@+id/file_name"
                           android:layout_width="match_parent"
                           android:layout_height="wrap_content"
-                          android:textAppearance="@style/Signal.Text.Body"
+                          style="@style/Signal.Text.Body"
                           android:singleLine="true"
                           android:maxLines="1"
                           android:clickable="false"
@@ -100,7 +100,7 @@
                 <TextView android:id="@+id/file_size"
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
-                          android:textAppearance="@style/Signal.Text.Caption"
+                          style="@style/Signal.Text.Caption"
                           android:clickable="false"
                           tools:text="24kb"/>
             </LinearLayout>

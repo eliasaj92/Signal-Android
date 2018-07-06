@@ -43,7 +43,7 @@
     <dimen name="conversation_individual_right_gutter">16dp</dimen>
     <dimen name="conversation_individual_left_gutter">16dp</dimen>
     <dimen name="conversation_group_right_gutter">16dp</dimen>
-    <dimen name="conversation_group_left_gutter">56dp</dimen>
+    <dimen name="conversation_group_left_gutter">52dp</dimen>
     <dimen name="conversation_vertical_message_spacing_default">16dp</dimen>
     <dimen name="conversation_vertical_message_spacing_collapse">2dp</dimen>
 
@@ -84,5 +84,10 @@
     <dimen name="scribble_stroke_size">2dp</dimen>
 
     <dimen name="floating_action_button_margin">16dp</dimen>
+
+    <dimen name="text_headline_lineSpacingExtra">6sp</dimen>
+    <dimen name="text_body_lineSpacingExtra">8sp</dimen>
+    <dimen name="text_preview_lineSpacingExtra">6sp</dimen>
+    <dimen name="text_caption_lineSpacingExtra">4sp</dimen>
 
 </resources>
