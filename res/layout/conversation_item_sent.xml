@@ -42,7 +42,7 @@
             android:layout_marginStart="@dimen/message_bubble_edge_margin"
             android:orientation="vertical"
             android:paddingTop="@dimen/message_bubble_top_padding"
-            android:background="@drawable/message_bubble_background"
+            android:background="@drawable/message_bubble_background_sent_alone"
             android:clipToPadding="false"
             android:clipChildren="false"
             tools:backgroundTint="@color/core_light_10">
@@ -122,6 +122,7 @@
                     android:linksClickable="false"
                     android:textAppearance="@style/Signal.Text.Caption.MessageSent"
                     android:textColor="?conversation_item_sent_text_secondary_color"
+                    android:textAllCaps="true"
                     tools:text="30 mins"/>
 
                 <View

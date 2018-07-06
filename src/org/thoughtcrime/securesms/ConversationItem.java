@@ -226,6 +226,7 @@ public class ConversationItem extends LinearLayout
     setMediaAttributes(messageRecord, conversationRecipient);
     setInteractionState(messageRecord, pulseHighlight);
     setBodyText(messageRecord);
+    setMessageBackground(messageRecord, previousMessageRecord, nextMessageRecord, groupThread);
     setBubbleState(messageRecord, conversationRecipient);
     setStatusIcons(messageRecord);
     setContactPhoto(recipient);
@@ -344,11 +345,12 @@ public class ConversationItem extends LinearLayout
   private void setBubbleState(MessageRecord messageRecord, Recipient conversationRecipient) {
     if (messageRecord.isOutgoing()) {
       bodyBubble.getBackground().setColorFilter(defaultBubbleColor, PorterDuff.Mode.MULTIPLY);
-      if (mediaThumbnailStub.resolved()) mediaThumbnailStub.get().setBackgroundColorHint(defaultBubbleColor);
-    } else {
       int color = conversationRecipient.getColor().toConversationColor(context);
       bodyBubble.getBackground().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
       if (mediaThumbnailStub.resolved()) mediaThumbnailStub.get().setBackgroundColorHint(color);
+    } else {
+      bodyBubble.getBackground().setColorFilter(defaultBubbleColor, PorterDuff.Mode.MULTIPLY);
+      if (mediaThumbnailStub.resolved()) mediaThumbnailStub.get().setBackgroundColorHint(defaultBubbleColor);
     }
 
     if (audioViewStub.resolved()) {
@@ -724,10 +726,31 @@ public class ConversationItem extends LinearLayout
     }
   }
 
+  private void setMessageBackground(@NonNull MessageRecord           current,
+                                    @NonNull Optional<MessageRecord> previous,
+                                    @NonNull Optional<MessageRecord> next,
+                                             boolean                 isGroupThread)
+  {
+    if (isStartOfMessageClusterOr(current, previous, isGroupThread) && isEndOfMessageCluster(current, next, isGroupThread)) {
+      bodyBubble.setBackgroundResource(current.isOutgoing() ? R.drawable.message_bubble_background_sent_alone
+                                                            : R.drawable.message_bubble_background_received_alone);
+    } else if (isStartOfMessageClusterOr(current, previous, isGroupThread)) {
+      bodyBubble.setBackgroundResource(current.isOutgoing() ? R.drawable.message_bubble_background_sent_start
+                                                            : R.drawable.message_bubble_background_received_start);
+    } else if (isEndOfMessageCluster(current, next, isGroupThread)) {
+      bodyBubble.setBackgroundResource(current.isOutgoing() ? R.drawable.message_bubble_background_sent_end
+                                                            : R.drawable.message_bubble_background_received_end);
+    } else {
+      bodyBubble.setBackgroundResource(current.isOutgoing() ? R.drawable.message_bubble_background_sent_middle
+                                                            : R.drawable.message_bubble_background_received_middle);
+    }
+  }
+
   private void setAuthorTitleVisibility(@NonNull MessageRecord current, @NonNull Optional<MessageRecord> previous, boolean isGroupThread) {
     if (isGroupThread && !current.isOutgoing()) {
       if (!previous.isPresent() || previous.get().isUpdate() || !current.getRecipient().getAddress().equals(previous.get().getRecipient().getAddress())) {
         groupSenderHolder.setVisibility(VISIBLE);
+        groupSender.setTextColor(current.getRecipient().getColor().toConversationColor(context));
         setPaddingTop(bodyBubble, readDimen(R.dimen.message_bubble_top_padding));
       } else {
         groupSenderHolder.setVisibility(GONE);
@@ -746,6 +769,22 @@ public class ConversationItem extends LinearLayout
       }
     } else if (contactPhoto != null) {
       contactPhoto.setVisibility(GONE);
+    }
+  }
+
+  private boolean isStartOfMessageClusterOr(@NonNull MessageRecord current, @NonNull Optional<MessageRecord> previous, boolean isGroupThread) {
+    if (isGroupThread) {
+      return !previous.isPresent() || previous.get().isUpdate() || !current.getRecipient().getAddress().equals(previous.get().getRecipient().getAddress());
+    } else {
+      return !previous.isPresent() || previous.get().isUpdate() || current.isOutgoing() != previous.get().isOutgoing();
+    }
+  }
+
+  private boolean isEndOfMessageCluster(@NonNull MessageRecord current, @NonNull Optional<MessageRecord> next, boolean isGroupThread) {
+    if (isGroupThread) {
+      return !next.isPresent() || next.get().isUpdate() || !current.getRecipient().getAddress().equals(next.get().getRecipient().getAddress());
+    } else {
+      return !next.isPresent() || next.get().isUpdate() || current.isOutgoing() != next.get().isOutgoing();
     }
   }
 

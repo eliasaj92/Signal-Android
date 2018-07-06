@@ -184,11 +184,16 @@
 
 
         <item name="conversation_item_bubble_background">@color/core_light_10</item>
-        <item name="conversation_item_sent_text_primary_color">@color/core_light_90</item>
-        <item name="conversation_item_sent_text_secondary_color">@color/core_light_60</item>
+        <!--<item name="conversation_item_sent_text_primary_color">@color/core_light_90</item>-->
+        <!--<item name="conversation_item_sent_text_secondary_color">@color/core_light_60</item>-->
+        <!--<item name="conversation_item_sent_text_indicator_tab_color">#99000000</item>-->
+        <!--<item name="conversation_item_received_text_primary_color">@color/white</item>-->
+        <!--<item name="conversation_item_received_text_secondary_color">#BFffffff</item>-->
+        <item name="conversation_item_received_text_primary_color">@color/core_light_90</item>
+        <item name="conversation_item_received_text_secondary_color">@color/core_light_60</item>
         <item name="conversation_item_sent_text_indicator_tab_color">#99000000</item>
-        <item name="conversation_item_received_text_primary_color">@color/white</item>
-        <item name="conversation_item_received_text_secondary_color">#BFffffff</item>
+        <item name="conversation_item_sent_text_primary_color">@color/white</item>
+        <item name="conversation_item_sent_text_secondary_color">#BFffffff</item>
         <item name="conversation_item_header_background">@drawable/conversation_item_header_background</item>
         <item name="conversation_item_last_seen_background">@drawable/last_seen_background</item>
         <item name="conversation_item_last_seen_text_background">@drawable/last_seen_divider_text_background_light</item>
