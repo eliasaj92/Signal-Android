@@ -2,13 +2,20 @@ package org.thoughtcrime.securesms.components;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.net.Uri;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.UiThread;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -19,7 +26,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.FitCenter;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 
 import org.thoughtcrime.securesms.R;
@@ -29,7 +35,6 @@ import org.thoughtcrime.securesms.mms.GlideRequest;
 import org.thoughtcrime.securesms.mms.GlideRequests;
 import org.thoughtcrime.securesms.mms.Slide;
 import org.thoughtcrime.securesms.mms.SlideClickListener;
-import org.thoughtcrime.securesms.util.Util;
 import org.thoughtcrime.securesms.util.ViewUtil;
 import org.whispersystems.libsignal.util.guava.Optional;
 
@@ -51,12 +56,15 @@ public class ThumbnailView extends FrameLayout {
   private ImageView       shade;
   private View            playOverlay;
   private int             backgroundColorHint;
-  private int             radius;
+  private int             topLeftRadius;
+  private int             topRightRadius;
+  private int             bottomLeftRadius;
+  private int             bottomRightRadius;
   private OnClickListener parentClickListener;
 
-  private final int[] dimens        = new int[2];
-  private final int[] bounds        = new int[4];
-  private final int[] measureDimens = new int[2];
+  private final int[]   dimens        = new int[2];
+  private final int[]   bounds        = new int[4];
+  private final int[]   measureDimens = new int[2];
 
   private Optional<TransferControlView> transferControls       = Optional.absent();
   private SlideClickListener            thumbnailClickListener = null;
@@ -76,11 +84,15 @@ public class ThumbnailView extends FrameLayout {
 
     inflate(context, R.layout.thumbnail_view, this);
 
-    this.radius      = getResources().getDimensionPixelSize(R.dimen.message_corner_radius);
     this.image       = findViewById(R.id.thumbnail_image);
     this.playOverlay = findViewById(R.id.play_overlay);
     this.shade       = findViewById(R.id.shade);
     super.setOnClickListener(new ThumbnailClickDispatcher());
+
+    setCornerRadius(getResources().getDimensionPixelSize(R.dimen.message_corner_radius));
+    setWillNotDraw(false);
+
+    setLayerType(LAYER_TYPE_HARDWARE, null);
 
     if (attrs != null) {
       TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.ThumbnailView, 0, 0);
@@ -91,6 +103,23 @@ public class ThumbnailView extends FrameLayout {
       bounds[MAX_HEIGHT]    = typedArray.getDimensionPixelSize(R.styleable.ThumbnailView_maxHeight, 0);
       typedArray.recycle();
     }
+  }
+
+  @Override
+  protected void dispatchDraw(Canvas canvas) {
+    super.dispatchDraw(canvas);
+
+    Path roundedCorners = new Path();
+    roundedCorners.addRoundRect(new RectF(0, 0, getWidth(), getHeight()), new float[] { topLeftRadius, topLeftRadius, topRightRadius, topRightRadius, bottomRightRadius, bottomRightRadius, bottomLeftRadius, bottomLeftRadius}, Path.Direction.CW);
+
+    Paint p = new Paint();
+
+    p.setColor(Color.RED);
+    p.setStyle(Paint.Style.FILL);
+    p.setAntiAlias(true);
+    p.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
+
+    canvas.drawPath(roundedCorners, p);
   }
 
   @Override
@@ -212,12 +241,27 @@ public class ThumbnailView extends FrameLayout {
     return transferControls.get();
   }
 
+  public void setCornerRadius(int radius) {
+    setCornerRadii(radius, radius, radius, radius);
+  }
+
+  public void setCornerRadii(int topLeft, int topRight, int bottomRight, int bottomLeft) {
+    this.topLeftRadius     = topLeft;
+    this.topRightRadius    = topRight;
+    this.bottomRightRadius = bottomRight;
+    this.bottomLeftRadius  = bottomLeft;
+  }
+
   public void setBackgroundColorHint(int color) {
     this.backgroundColorHint = color;
   }
 
   public void showShade(boolean showShade) {
     shade.setVisibility(showShade ? VISIBLE : GONE);
+  }
+
+  public void setImageBackground(@DrawableRes int resId) {
+    image.setBackgroundResource(resId);
   }
 
   @UiThread
@@ -247,18 +291,18 @@ public class ThumbnailView extends FrameLayout {
       this.playOverlay.setVisibility(View.GONE);
     }
 
-    if (Util.equals(slide, this.slide)) {
-      Log.w(TAG, "Not re-loading slide " + slide.asAttachment().getDataUri());
-      return;
-    }
+//    if (Util.equals(slide, this.slide)) {
+//      Log.w(TAG, "Not re-loading slide " + slide.asAttachment().getDataUri());
+//      return;
+//    }
 
-    if (this.slide != null && this.slide.getFastPreflightId() != null &&
-        this.slide.getFastPreflightId().equals(slide.getFastPreflightId()))
-    {
-      Log.w(TAG, "Not re-loading slide for fast preflight: " + slide.getFastPreflightId());
-      this.slide = slide;
-      return;
-    }
+//    if (this.slide != null && this.slide.getFastPreflightId() != null &&
+//        this.slide.getFastPreflightId().equals(slide.getFastPreflightId()))
+//    {
+//      Log.w(TAG, "Not re-loading slide for fast preflight: " + slide.getFastPreflightId());
+//      this.slide = slide;
+//      return;
+//    }
 
     Log.w(TAG, "loading part with id " + slide.asAttachment().getDataUri()
                + ", progress " + slide.getTransferState() + ", fast preflight id: " +
@@ -280,7 +324,6 @@ public class ThumbnailView extends FrameLayout {
     if (transferControls.isPresent()) getTransferControls().setVisibility(View.GONE);
     glideRequests.load(new DecryptableUri(uri))
                  .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                 .transform(new RoundedCorners(radius))
                  .transition(withCrossFade())
                  .centerCrop()
                  .into(image);
@@ -331,7 +374,7 @@ public class ThumbnailView extends FrameLayout {
       size[HEIGHT] = getDefaultHeight();
     }
     return request.override(size[WIDTH], size[HEIGHT])
-                  .transforms(fitting, new RoundedCorners(radius));
+                  .transforms(fitting);
   }
 
   private int getDefaultWidth() {

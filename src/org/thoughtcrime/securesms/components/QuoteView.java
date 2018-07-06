@@ -135,9 +135,9 @@ public class QuoteView extends LinearLayout implements RecipientModifiedListener
   protected void onDraw(Canvas canvas) {
     super.onDraw(canvas);
 
-    drawRect.left = 0;
-    drawRect.top = 0;
-    drawRect.right = getWidth();
+    drawRect.left   = 0;
+    drawRect.top    = 0;
+    drawRect.right  = getWidth();
     drawRect.bottom = getHeight();
 
     clipPath.reset();
