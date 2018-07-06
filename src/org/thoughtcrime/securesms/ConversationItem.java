@@ -345,10 +345,9 @@ public class ConversationItem extends LinearLayout
   private void setBubbleState(MessageRecord messageRecord, Recipient conversationRecipient) {
     if (messageRecord.isOutgoing()) {
       bodyBubble.getBackground().setColorFilter(defaultBubbleColor, PorterDuff.Mode.MULTIPLY);
-      int color = conversationRecipient.getColor().toConversationColor(context);
-      bodyBubble.getBackground().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
     } else {
       bodyBubble.getBackground().setColorFilter(defaultBubbleColor, PorterDuff.Mode.MULTIPLY);
+      bodyBubble.getBackground().setColorFilter(messageRecord.getRecipient().getColor().toConversationColor(context), PorterDuff.Mode.MULTIPLY);
     }
 
     if (audioViewStub.resolved()) {
@@ -801,7 +800,6 @@ public class ConversationItem extends LinearLayout
     if (isGroupThread && !current.isOutgoing()) {
       if (!previous.isPresent() || previous.get().isUpdate() || !current.getRecipient().getAddress().equals(previous.get().getRecipient().getAddress())) {
         groupSenderHolder.setVisibility(VISIBLE);
-        groupSender.setTextColor(current.getRecipient().getColor().toConversationColor(context));
         setPaddingTop(bodyBubble, readDimen(R.dimen.message_bubble_top_padding));
       } else {
         groupSenderHolder.setVisibility(GONE);
